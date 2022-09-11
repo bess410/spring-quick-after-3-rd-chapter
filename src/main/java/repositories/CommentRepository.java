@@ -1,8 +1,7 @@
 package repositories;
 
-import model.Comment;
+import org.springframework.stereotype.Repository;
 
-public interface CommentRepository {
-
-    void storeComment(Comment comment);
+@Repository
+public class CommentRepository {
 }

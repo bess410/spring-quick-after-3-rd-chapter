@@ -2,6 +2,7 @@ package services;
 
 import lombok.Data;
 import model.Comment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import proxies.CommentNotificationProxy;
 import repositories.CommentRepository;
@@ -10,7 +11,9 @@ import repositories.CommentRepository;
 @Component
 public class CommentService {
 
+    @Autowired
     private final CommentRepository commentRepository;
+    @Autowired
     private final CommentNotificationProxy commentNotificationProxy;
 
     public void publishComment(Comment comment) {

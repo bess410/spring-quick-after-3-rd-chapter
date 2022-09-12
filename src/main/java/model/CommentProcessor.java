@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import repositories.CommentRepository;
 
 @Component
-@Scope(BeanDefinition.SCOPE_PROTOTYPE)
+@Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
 public class CommentProcessor {
     private Comment comment;
 

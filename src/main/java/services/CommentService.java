@@ -8,11 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommentService {
 
-    private CommentProcessor processor;
-
     @Lookup
     public CommentProcessor getProcessor() {
-        return this.processor;
+        return null;
     }
 
     public void sendComment(Comment comment) {

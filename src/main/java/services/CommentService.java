@@ -1,23 +1,16 @@
 package services;
 
 import model.Comment;
-import model.CommentProcessor;
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.logging.Logger;
 
 @Service
 public class CommentService {
+    private Logger logger = Logger.getLogger(CommentService.class.getName());
 
-    @Autowired
-    private ObjectFactory<CommentProcessor> factory;
-
-    public void sendComment(Comment comment) {
-        CommentProcessor processor = factory.getObject();
-        processor.setComment(comment);
-        processor.processComment();
-        processor.validateComment();
-        System.out.println(processor.getComment().getText());
+    public void publishComment(Comment comment) {
+        logger.info("Publishing comment: " + comment.getText());
     }
 
 }

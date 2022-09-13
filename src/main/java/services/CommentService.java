@@ -7,10 +7,11 @@ import java.util.logging.Logger;
 
 @Service
 public class CommentService {
-    private Logger logger = Logger.getLogger(CommentService.class.getName());
+    private final Logger logger = Logger.getLogger(CommentService.class.getName());
 
-    public void publishComment(Comment comment) {
+    public String publishComment(Comment comment) {
         logger.info("Publishing comment: " + comment.getText());
+        return "SUCCESS";
     }
 
 }

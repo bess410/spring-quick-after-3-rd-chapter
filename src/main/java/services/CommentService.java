@@ -1,27 +1,26 @@
 package services;
 
 import annotations.ToLog;
+import lombok.extern.java.Log;
 import model.Comment;
 import org.springframework.stereotype.Service;
 
-import java.util.logging.Logger;
-
+@Log
 @Service
 public class CommentService {
-    private final Logger logger = Logger.getLogger(CommentService.class.getName());
-
-    public void publishComment(Comment comment) {
-        logger.info("Publishing comment: " + comment.getText());
-    }
 
     @ToLog
-    public String deleteComment(Comment comment) {
-        logger.info("Deleting comment: " + comment.getText());
+    public String publishComment(Comment comment) {
+        log.info("Publishing comment: " + comment.getText());
         return "SUCCESS";
     }
 
+    public void deleteComment(Comment comment) {
+        log.info("Deleting comment: " + comment.getText());
+    }
+
     public void editComment(Comment comment) {
-        logger.info("Editing comment: " + comment.getText());
+        log.info("Editing comment: " + comment.getText());
     }
 
 }

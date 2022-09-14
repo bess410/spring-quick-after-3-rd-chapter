@@ -7,19 +7,19 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Log
 @Aspect
+@Log
 @Component
-@Order(2)
-public class LoggingAspect {
+@Order(1)
+public class SecurityAspect {
 
     @Around(value = "@annotation(annotations.ToLog)")
-    public Object log(ProceedingJoinPoint joinPoint) throws Throwable{
-        log.info("Logging Aspect: Calling the intercepted method");
+    public Object secure(ProceedingJoinPoint joinPoint) throws Throwable{
+        log.info("Security Aspect: Calling the intercepted method");
 
         Object returnedValue = joinPoint.proceed();
 
-        log.info("Logging Aspect: Method executed and returned " + returnedValue);
+        log.info("Security Aspect: Method executed and returned " + returnedValue);
 
         return returnedValue;
     }

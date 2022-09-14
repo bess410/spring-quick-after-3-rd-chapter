@@ -1,6 +1,5 @@
 package aspects;
 
-import model.Comment;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,7 +13,7 @@ import java.util.logging.Logger;
 public class LoggingAspect {
     private final Logger logger = Logger.getLogger(LoggingAspect.class.getName());
 
-    @Around("execution(* services.*.*(..))")
+    @Around("@annotation(annotations.ToLog)")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
@@ -23,15 +22,10 @@ public class LoggingAspect {
                 " with parameters " + Arrays.asList(args) +
                 " will execute");
 
-        Comment comment = new Comment();
-        comment.setText("Some other text");
-
-        Object[] newArguments = {comment};
-
-        Object returnedByMethod = joinPoint.proceed(newArguments);
+        Object returnedByMethod = joinPoint.proceed(args);
 
         logger.info("Method executed and returned " + returnedByMethod);
 
-        return "FAILED";
+        return returnedByMethod;
     }
 }

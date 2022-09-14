@@ -15,8 +15,9 @@ public class CommentService {
     }
 
     @ToLog
-    public void deleteComment(Comment comment) {
+    public String deleteComment(Comment comment) {
         logger.info("Deleting comment: " + comment.getText());
+        return "SUCCESS";
     }
 
     public void editComment(Comment comment) {

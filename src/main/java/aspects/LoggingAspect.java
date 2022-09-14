@@ -1,6 +1,7 @@
 package aspects;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
@@ -13,19 +14,8 @@ import java.util.logging.Logger;
 public class LoggingAspect {
     private final Logger logger = Logger.getLogger(LoggingAspect.class.getName());
 
-    @Around("@annotation(annotations.ToLog)")
-    public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
-        String methodName = joinPoint.getSignature().getName();
-        Object[] args = joinPoint.getArgs();
-
-        logger.info("Method " + methodName +
-                " with parameters " + Arrays.asList(args) +
-                " will execute");
-
-        Object returnedByMethod = joinPoint.proceed(args);
-
-        logger.info("Method executed and returned " + returnedByMethod);
-
-        return returnedByMethod;
+    @AfterReturning(value = "@annotation(annotations.ToLog)", returning = "returnedValue")
+    public void log(Object returnedValue) {
+        logger.info("Method executed and returned " + returnedValue);
     }
 }
